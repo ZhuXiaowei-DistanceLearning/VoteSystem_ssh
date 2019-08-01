@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.custom.i18n.resources" value="message"></constant>
+    <!--	name		：包的名称，只有在一个项目中不重名即可。
+        	extends		：继承哪个包，通常值为struts-default。
+        	namespace	：名称空间，与<action>标签中的name属性共同决定访问路径。
+        	名称空间有三种写法：
+        	带名称的名称空间		：namespace=”/aaa”
+        	跟名称空间			：namespance=”/”
+        	默认名称空间			：namespace=””
+        	abstract		：抽象的，用于其他包的继承。
+-->
+    <package extends="struts-default" name="zxw" namespace="/">
+        <interceptors>
+            <interceptor name="myFilter" class="com.zxw.filter.MyFilter"></interceptor>
+            <interceptor-stack name="myDefaultStack">
+                <interceptor-ref name="myFilter"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myDefaultStack"></default-interceptor-ref>
+        <!--&lt;!&ndash;        <global-results>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="login">login.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </global-results>&ndash;&gt;-->
+        <!--	name		：与namespace共同决定访问路径
+        	class			：Action类的全路径
+        	method		：执行Action中的哪个方法的方法名，默认值execute
+        	converter		：用于设置类型转换器
+-->
+        <action name="user_*" class="com.zxw.web.LoginServlet" method="{1}"></action>
+        <action name="us_*" class="com.zxw.web.User_SubjectAction" method="{1}"></action>
+        <action name="ui_*" class="com.zxw.web.User_ItemAction" method="{1}"></action>
+        <action name="op_*" class="com.zxw.web.OptionAction" method="{1}"></action>
+        <action name="sub_*" class="com.zxw.web.SubjectAction" method="{1}"></action>
+        <action name="mv_*" class="com.zxw.web.mainVoAction" method="{1}"></action>
+        <action name="vi_*" class="com.zxw.web.VoteInfoAction" method="{1}"></action>
+
+        <!--&lt;!&ndash;        <action name="collegeAction_*" class="collegeAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/college.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="specialtyAction_*" class="specialtyAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/specialty.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="classesAction_*" class="classesAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/classes.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="page">/WEB-INF/pages/base/studentInfo.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="studentAction_*" class="studentAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/studentInfo.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="teacherlist">/WEB-INF/pages/teacher/course.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="studentInfo">/WEB-INF/pages/base/studentInfo.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="teacherAction_*" class="teacherAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/teacher.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="courseAction_*" class="courseAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/course.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="page">/WEB-INF/pages/teacher/score.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="weekAction_*" class="weekAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/teacher.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="sectionAction_*" class="sectionAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/base/teacher.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="loginAction" class="loginAction" method="login">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">index.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;        <action name="functionAction_*" class="functionAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/admin/function.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;        <action name="roleAction_*" class="roleAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/admin/role.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="natureAction_*" class="natureAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/admin/role.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="scoreAction_*" class="scoreAction" method="{1}">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="list">/WEB-INF/pages/student/course.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="score">/WEB-INF/pages/teacher/score.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="findCourse">/WEB-INF/pages/student/schedule.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+        <!--&lt;!&ndash;        <action name="page_*_*">&ndash;&gt;-->
+        <!--&lt;!&ndash;            <result name="success" type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>&ndash;&gt;-->
+        <!--&lt;!&ndash;        </action>&ndash;&gt;-->
+    </package>
+</struts>
