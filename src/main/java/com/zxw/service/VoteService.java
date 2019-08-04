@@ -100,9 +100,12 @@ public class VoteService {
         UitemMapper.save(user_Item);
         Item item = new Item();
         item.setId(itemId);
-        item.setSubjectId(optionId);
-        item.setOptionId(subjectId);
+        item.setSubjectId(subjectId);
+        item.setOptionId(optionId);
         itemMapper.save(item);
+        Subject id = subjectMapper.findById(subjectId);
+        id.setTotal(id.getTotal() == 0?1:id.getTotal()+1);
+        subjectMapper.update(id);
     }
 
     public List<User_Subject> selectSubjectByUser(Long id) {

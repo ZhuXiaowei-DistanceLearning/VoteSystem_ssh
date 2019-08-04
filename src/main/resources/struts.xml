@@ -20,6 +20,8 @@
             <interceptor name="myFilter" class="com.zxw.filter.MyFilter"></interceptor>
             <interceptor-stack name="myDefaultStack">
                 <interceptor-ref name="myFilter"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="params" />
             </interceptor-stack>
         </interceptors>
         <default-interceptor-ref name="myDefaultStack"></default-interceptor-ref>

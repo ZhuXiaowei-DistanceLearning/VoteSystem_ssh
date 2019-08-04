@@ -94,7 +94,7 @@ public class User_SubjectAction extends BaseAction<User_Subject> {
         String cookieValue1 = CookieUtils.getCookieValue(ServletActionContext.getRequest(), properties.getCookieName());
         UserInfo userInfo = JwtUtils.getInfoFromToken(cookieValue1, properties.getPublicKey());
         try {
-            voteService.insertItem(userInfo.getId(), getModel().getSubjectId(), radios);
+            voteService.insertItem(userInfo.getId(),radios,getModel().getSubjectId());
         } catch (Exception e) {
             e.printStackTrace();
         }

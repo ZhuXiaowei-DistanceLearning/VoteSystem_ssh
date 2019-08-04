@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserService {
     @Autowired
     UserMapper userMapper;
@@ -32,7 +33,6 @@ public class UserService {
         return null;
     }
 
-    @Transactional
     public void register(User user) {
         userMapper.save(user);
     }
@@ -43,4 +43,19 @@ public class UserService {
         return user;
     }
 
+    public User findById(String id){
+        User user = userMapper.findById(id);
+        return user;
+    }
+
+    public List<User> findAll() {
+        List<User> list = userMapper.findAll();
+        return list;
+    }
+
+    public void update(User id) {
+        User user = userMapper.findById(id.getId());
+        user.setVersion(id.getVersion());
+        userMapper.update(user);
+    }
 }

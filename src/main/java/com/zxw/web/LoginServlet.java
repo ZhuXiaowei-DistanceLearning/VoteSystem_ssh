@@ -1,5 +1,6 @@
 package com.zxw.web;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import com.zxw.auth.entity.UserInfo;
 import com.zxw.auth.utils.JwtUtils;
 import com.zxw.auth.utils.RsaUtils;
@@ -26,7 +27,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@Scope("prototype")
 public class LoginServlet extends BaseAction<User> {
     //	UserService userService = new UserService();
     Logger logger = new Logger(LoginServlet.class);
@@ -37,10 +37,14 @@ public class LoginServlet extends BaseAction<User> {
     private UserService userService;
 
     public String login() throws IOException {
-        String token = userService.login(getModel().getUsername(), getModel().getPassword(), properties);
-        CookieUtils.setCookie(ServletActionContext.getRequest(), ServletActionContext.getResponse(),
-                properties.getCookieName(), token, properties.getCookieMaxAge(), null, true);
-        writePageBean2Json("success");
+        try {
+            String token = userService.login(getModel().getUsername(), getModel().getPassword(), properties);
+            CookieUtils.setCookie(ServletActionContext.getRequest(), ServletActionContext.getResponse(),
+                    properties.getCookieName(), token, properties.getCookieMaxAge(), null, true);
+            writePageBean2Json("success");
+        } catch (Exception e) {
+            writePageBean2Json("error");
+        }
         return NONE;
     }
 
@@ -104,6 +108,30 @@ public class LoginServlet extends BaseAction<User> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String findAll() throws IOException {
+        List<User> user = userService.findAll();
+        writeList2Json(user);
+        return NONE;
+    }
+
+    public String updateUserInfo() throws IOException {
+        User user = getModel();
+        userService.update(user);
+        writePageBean2Json("success");
+        return NONE;
+    }
+
+    public String mainUser() throws IOException {
+        String id = getModel().getId();
+        User user = userService.findById(id);
+        if (user != null) {
+            writePageBean2Json(user);
+        } else {
+            writePageBean2Json("error");
+        }
+        return NONE;
     }
 
 }

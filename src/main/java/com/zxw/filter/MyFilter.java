@@ -33,7 +33,10 @@ public class MyFilter extends AbstractInterceptor {
     public String intercept(ActionInvocation invocation) throws Exception {
         HttpServletRequest req = ServletActionContext.getRequest();
         String pathInfo1 = ServletActionContext.getRequest().getPathInfo();
-        String pathInfo = req.getPathInfo();
+        String pathInfo = req.getServletPath();
+        if(pathInfo.contains("login")||pathInfo.contains("register")){
+            invocation.invoke();
+        }
         String cookieValue = CookieUtils.getCookieValue(req, properties.getCookieName());
         try {
             UserInfo info = JwtUtils.getInfoFromToken(cookieValue, properties.getPublicKey());
