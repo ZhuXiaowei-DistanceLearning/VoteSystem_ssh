@@ -1,7 +1,6 @@
-VoteSystem_2018200280
-
 # 投票管理系统
-
+@Author:zxw<br/>
+@School:吉首大学<br/>
 ## 每天内容总结
 
 1. 搭建项目环境
