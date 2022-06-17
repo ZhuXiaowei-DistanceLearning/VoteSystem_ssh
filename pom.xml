@@ -22,7 +22,7 @@
         <servlet.version>2.5</servlet.version>
         <junit.version>4.11</junit.version>
         <c3p0.version>0.9.5.2</c3p0.version>
-        <fastjson.version>1.1.37</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <springdatajpa.version>1.9.0.RELEASE</springdatajpa.version>
         <springdataredis.version>1.4.1.RELEASE</springdataredis.version>
         <jedis.version>2.6.2</jedis.version>
